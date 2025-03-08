@@ -6,7 +6,6 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///reviews.db'  # База да�
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
-# Модель для отзывов
 class Review(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     author = db.Column(db.String(100), nullable=False)
@@ -51,6 +50,14 @@ def reviews():
     # Получение всех отзывов из базы данных
     reviews = Review.query.all()
     return render_template('reviews.html', reviews=reviews)
+
+# Маршрут для удаления отзыва
+@app.route('/delete_review/<int:review_id>', methods=['POST'])
+def delete_review(review_id):
+    review = Review.query.get_or_404(review_id)  # Находим отзыв по ID
+    db.session.delete(review)  # Удаляем отзыв
+    db.session.commit()  # Сохраняем изменения в базе данных
+    return redirect(url_for('reviews'))  # Перенаправляем обратно на страницу с отзывами
 
 # Страница "Контакты"
 @app.route('/contacts')

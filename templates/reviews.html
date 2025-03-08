@@ -20,6 +20,10 @@
             <li>
                 <h2>{{ review.author }}</h2>
                 <p>{{ review.text }}</p>
+                <!-- Кнопка удаления -->
+                <form method="POST" action="{{ url_for('delete_review', review_id=review.id) }}" style="display:inline;">
+                    <button type="submit">Удалить</button>
+                </form>
             </li>
         {% endfor %}
     </ul>
