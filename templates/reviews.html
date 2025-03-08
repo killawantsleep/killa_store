@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block title %}Отзывы{% endblock %}
+
+{% block content %}
+    <h1>Отзывы наших клиентов</h1>
+
+    <!-- Форма для добавления отзыва -->
+    <form method="POST" action="{{ url_for('reviews') }}">
+        <label for="author">Ваше имя:</label>
+        <input type="text" id="author" name="author" required>
+        <label for="text">Ваш отзыв:</label>
+        <textarea id="text" name="text" required></textarea>
+        <button type="submit">Отправить отзыв</button>
+    </form>
+
+    <!-- Список отзывов -->
+    <ul>
+        {% for review in reviews %}
+            <li>
+                <h2>{{ review.author }}</h2>
+                <p>{{ review.text }}</p>
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}

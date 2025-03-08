@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block title %}Продукты{% endblock %}
+
+{% block content %}
+    <h1>Наши продукты</h1>
+    <ul>
+        {% for script in scripts %}
+            <li>
+                <h2>{{ script.name }}</h2>
+                <p>{{ script.description }}</p>
+                <a href="#" class="button">Купить</a>
+                <a href="#" class="button">Подробнее</a>
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}
